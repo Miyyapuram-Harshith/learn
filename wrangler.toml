@@ -1,0 +1,30 @@
+name = "articlarity-learn"
+compatibility_date = "2026-10-31"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "articlarity_learn_db"
+database_id = "your-cloudflare-d1-uuid"
+
+[[kv_namespaces]]
+binding = "CONFIG_KV"
+id = "your-cloudflare-kv-uuid"
+
+[[r2_buckets]]
+binding = "ASSETS_R2"
+bucket_name = "articlarity-learn-assets"
+
+[[queues.producers]]
+binding = "GITHUB_QUEUE"
+queue = "articlarity-github-commits"
+
+[[queues.consumers]]
+queue = "articlarity-github-commits"
+max_batch_size = 10
+max_batch_timeout = 5
+max_retries = 3
+
+[triggers]
+crons = ["0 * * * *"] # Hourly streak-freeze & birthday XP boost evaluator
